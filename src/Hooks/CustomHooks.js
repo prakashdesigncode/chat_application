@@ -55,17 +55,3 @@ export const useQueryParams = ()=>{
   return [searchParams,handleParams]
 }
 
-/*
-@params  - param1 : anytype
-@useAges - use for search data once action completed delay to call function
-*/
-export const useDebounce = (input) => {
-  const [state,setState]=useState('');
-  useEffect(() => {
-    const cb = setTimeout(() => {
-      if (input) setState(input);
-    }, 500);
-    return () => clearTimeout(cb);
-  }, [input]);
-  return [state]
-};
