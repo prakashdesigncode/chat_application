@@ -15,9 +15,9 @@ import { MessageContext } from "..";
 const Index = () => {
   const [showChat, handleShowChat] = useBooleanHook();
   const [params] = useQueryParams();
-  const userId = params.get("userId") || "2";
-  const [localMessages, setLocalMesssages] = useState(fromJS());
-  const { currentUser } = useContext(MessageContext);
+  const userId = params.get("userId") || "1";
+  const [localMessages, setLocalMesssages] = useState(fromJS([]));
+  const { currentUser} = useContext(MessageContext);
   const param = { userId, showChat, localMessages, setLocalMesssages,currentUser};
 
   useEffect(() => {
@@ -75,7 +75,7 @@ const MessageBody = ({
 
   useEffect(() => {
     setGobalMessages((previous) =>
-      previous.setIn([currentUser, userId], fromJS(localMessages))
+      previous.setIn([currentUser, userId], fromJS(localMessages)).setIn([userId,currentUser],fromJS(localMessages))
     );
   }, [localMessages,currentUser]);
 
