@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo,useContext } from "react";
 import { fromJS } from "immutable";
 import { SearchingIcon ,UserSwitchIcon} from "hugeicons-react";
 import { users } from "../StaticAssets/data";
@@ -6,17 +6,22 @@ import {
   useInputHook,
   useQueryParams,
 } from "../Hooks/CustomHooks";
+import { MessageContext } from "..";
 
 
 /*-----------------------------------------------COMPOUND START----------------------------------------------*/
 const Index = () => {
   const [userList, setUserList] = useState(fromJS(users));
-  const [currentUser, setCurrentUser] = useState("1");
   const [params, handleParams] = useQueryParams();
   const [search, handleSearch] = useInputHook("");
   const selectedUser = params.get('userId');
+  const { currentUser, setCurrentUser } = useContext(MessageContext);
   
   const handleChangeChat = (userId) => handleParams({ userId });
+  const handleSwitch = (userId) => {
+
+    setCurrentUser(userId)
+  }
 
   const filteredUser = useMemo(() => {
     let filtered = userList.filter(
@@ -25,7 +30,7 @@ const Index = () => {
         key === search
     );
     return filtered;
-  }, [search, userList]);
+  }, [search, userList,currentUser]);
 
   useEffect(() => {
     setUserList((previous) => {
@@ -56,10 +61,16 @@ const Index = () => {
       </div>
       <div className="recent d-flex align-items-center px-3">
         <h6>RECENT</h6>
-        <div data-bs-toggle="tooltip" title="Switch User">
+        <div data-bs-toggle="tooltip" className="switch-user" title="Switch User">
         <UserSwitchIcon size={24}   color={"#ffffff"}
             variant={"stroke"}
-            className="mx-2 mb-2"/>
+            className="mx-2 mb-2 switch"/>
+         <div className="user-list">
+          {filteredUser.entrySeq().map(([key, value], index) => {
+            return <div key={index} onClick={()=>handleSwitch(key)} className="my-3 text-white cursor-pointer">{value.get("name", "Unkown User")}</div> 
+          })
+        }
+         </div>   
       </div>
       </div>
       <div className="chats mt-4 text-danger pt-3 pb-5 ">

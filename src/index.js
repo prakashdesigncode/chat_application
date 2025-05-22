@@ -13,8 +13,9 @@ const ChatMessage = lazy(() => import("./Dashboard/index"));
 
 const ChatNavigation = () => {
   const [gobalMessages, setGobalMessages] = useState(fromJS(preLoadedMessages));
+  const [currentUser, setCurrentUser] = useState("2");
   return (
-    <MessageContext.Provider value={{ gobalMessages, setGobalMessages }}>
+    <MessageContext.Provider value={{ gobalMessages, setGobalMessages,currentUser,setCurrentUser }}>
       <Router>
         <Routes>
           <Route

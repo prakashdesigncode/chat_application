@@ -160,3 +160,21 @@
   .send-icon{
     transform: rotate(45deg);
   }
+
+.switch-user:hover{
+  position: relative;
+}
+
+.user-list{
+  visibility: visible;
+  position: absolute;
+  background-color: #3d4354;
+  border-radius: 4px;
+  padding: 5px 15px;
+  width: 200px;
+  height: 100px; 
+  letter-spacing: 1px;
+}
+.switch:hover .user-list{
+    visibility: visible;
+}
