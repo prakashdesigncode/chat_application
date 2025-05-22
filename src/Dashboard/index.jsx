@@ -1,7 +1,7 @@
 import React from "react";
 import { useFullScreen } from "../Hooks/CustomHooks.js";
 import "../Styles/Chat.scss";
-import { SuspenseCall } from "../Utiles/ReactUtile.jsx";
+import { SuspenseCall } from "../Utils/ReactUtile.jsx";
 
 const UserList = React.lazy(() => import("../Compounds/UserList.jsx"));
 const ChatUser = React.lazy(() => import("../Compounds/UserChat.jsx"));

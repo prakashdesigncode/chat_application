@@ -1,9 +1,9 @@
-import defalutImage from '../Assets/profile.png'
+import defaultImage from '../Assets/profile.png'
 
 export const users = {
-    1: {name:'Prakash',url:defalutImage},
-    2: {name:'Karan',url:defalutImage},
-    3: {name:'Sunil',url:defalutImage}
+    1: {name:'Prakash',url:defaultImage},
+    2: {name:'Karan',url:defaultImage},
+    3: {name:'Sunil',url:defaultImage}
   };
   
 export const preLoadedMessages = {

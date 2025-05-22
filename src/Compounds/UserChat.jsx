@@ -16,12 +16,13 @@ const Index = () => {
   const [showChat, handleShowChat] = useBooleanHook();
   const [params] = useQueryParams();
   const userId = params.get("userId") || "1";
-  const [localMessages, setLocalMesssages] = useState(fromJS([]));
+  const [localMessages, setLocalMessages] = useState(fromJS([]));
   const { currentUser} = useContext(MessageContext);
-  const param = { userId, showChat, localMessages, setLocalMesssages,currentUser};
+  const param = { userId, showChat, localMessages, setLocalMessages,currentUser};
 
   useEffect(() => {
     handleShowChat(Boolean(params.get("userId")));
+    // eslint-disable-next-line 
   }, [params]);
 
   return (
@@ -44,7 +45,7 @@ const Header = ({ showChat, userId ,currentUser}) => {
     <div className="d-flex justify-content-between align-items-center mt-4 mx-3">
       {showChat && (
         <div className="d-flex gap-3">
-          <img className="user-image" src={users[userId].url} />
+          <img className="user-image" src={users[userId].url} alt=""/>
           <div className="text-white align-self-center">
             {users[userId].name}
           </div>
@@ -52,7 +53,7 @@ const Header = ({ showChat, userId ,currentUser}) => {
       )}
       <div className="d-flex gap-3 align-self-end">
         <div className="text-white align-self-center">{users[currentUser].name}</div>
-        <img className="user-image" src={users[currentUser].url} />
+        <img className="user-image" src={users[currentUser].url} alt=""/>
       </div>
     </div>
   );
@@ -61,22 +62,24 @@ const Header = ({ showChat, userId ,currentUser}) => {
 const MessageBody = ({
   showChat,
   userId,
-  setLocalMesssages,
+  setLocalMessages,
   localMessages,
   currentUser
 }) => {
-  const { gobalMessages, setGobalMessages } = useContext(MessageContext);
+  const { globalMessages, setGlobalMessages } = useContext(MessageContext);
   let scrollScreen = useRef(null);
   useScrollIntoView(scrollScreen);
 
   useEffect(() => {
-    if (userId) setLocalMesssages(gobalMessages.getIn([currentUser, userId], List()));
+    if (userId) setLocalMessages(globalMessages.getIn([currentUser, userId], List()));
+    // eslint-disable-next-line 
   }, [userId,currentUser]);
 
   useEffect(() => {
-    setGobalMessages((previous) =>
+    setGlobalMessages((previous) =>
       previous.setIn([currentUser, userId], fromJS(localMessages)).setIn([userId,currentUser],fromJS(localMessages))
     );
+    // eslint-disable-next-line 
   }, [localMessages,currentUser]);
 
   return (
@@ -124,11 +127,11 @@ const MessageBody = ({
   );
 };
 
-const FooterInput = ({ setLocalMesssages, showChat ,currentUser}) => {
+const FooterInput = ({ setLocalMessages, showChat ,currentUser}) => {
   const [chatInput, handleChange] = useInputHook("");
 
   const handleSend = () => {
-    setLocalMesssages((previous) =>
+    setLocalMessages((previous) =>
       previous.push(
         Map({
           message: chatInput,

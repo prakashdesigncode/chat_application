@@ -6,16 +6,16 @@ import "bootstrap/scss/bootstrap.scss";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { fromJS } from "immutable";
 import { preLoadedMessages } from "./StaticAssets/data";
-import { SuspenseCall } from "./Utiles/ReactUtile";
+import { SuspenseCall } from "./Utils/ReactUtile";
 
 export const MessageContext = createContext();
 const ChatMessage = lazy(() => import("./Dashboard/index"));
 
 const ChatNavigation = () => {
-  const [gobalMessages, setGobalMessages] = useState(fromJS(preLoadedMessages));
+  const [globalMessages, setGlobalMessages] = useState(fromJS(preLoadedMessages));
   const [currentUser, setCurrentUser] = useState("2");
   return (
-    <MessageContext.Provider value={{ gobalMessages, setGobalMessages,currentUser,setCurrentUser }}>
+    <MessageContext.Provider value={{ globalMessages, setGlobalMessages,currentUser,setCurrentUser }}>
       <Router>
         <Routes>
           <Route

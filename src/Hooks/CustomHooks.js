@@ -36,6 +36,7 @@ export const useFullScreen = (id='') => {
      };
      document.addEventListener("click", handleFullScreen);
      return () => document?.removeEventListener("click", handleFullScreen);
+     // eslint-disable-next-line 
    }, []);
 };
 
@@ -43,10 +44,11 @@ export const useFullScreen = (id='') => {
 @params  - param1 : react-ref , param2 : array
 @useAges - the last message scroll into view on screen
  */
-export const useScrollIntoView = (ref,depency=[])=>{
+export const useScrollIntoView = (ref,decency=[])=>{
   useEffect(()=>{
     if(ref.current) ref.current.scrollIntoView({ behavior: 'smooth' });
-  },[depency])
+    // eslint-disable-next-line 
+  },[decency])
 }
 
 export const useQueryParams = ()=>{

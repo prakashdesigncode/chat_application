@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo, useContext } from "react";
-import { fromJS, Map } from "immutable";
+import { fromJS } from "immutable";
 import { SearchingIcon, UserSwitchIcon } from "hugeicons-react";
 import { users } from "../StaticAssets/data";
 import { useInputHook, useQueryParams } from "../Hooks/CustomHooks";
@@ -36,8 +36,6 @@ const Index = () => {
       );
     });
   }, [currentUser]);
-
-  console.log(userList.toJS(), 40);
 
   return (
     <div className="dashboard px-4">
@@ -80,7 +78,7 @@ const Index = () => {
                     onClick={() => handleSwitch(key)}
                     className="my-3 text-white cursor-pointer"
                   >
-                    {value.get("name", "Unkown User")}
+                    {value.get("name", "Unknown User")}
                   </div>
                 );
               })}
@@ -99,12 +97,12 @@ const Index = () => {
               key={index}
               onClick={() => handleChangeChat(key)}
             >
-              <img className="user-image" src={value.get("url", "")} />
+              <img className="user-image" src={value.get("url", "")} alt=""/>
               <div className="user-details">
                 <div className="text-white">
-                  {value.get("name", "Unkown User")}
+                  {value.get("name", "Unknown User")}
                 </div>
-                <div className="text-secondary">Avalable</div>
+                <div className="text-secondary">Available</div>
               </div>
             </div>
           );
